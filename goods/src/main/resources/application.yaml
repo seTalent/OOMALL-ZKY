@@ -1,0 +1,82 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 124.70.56.73
+  data:
+    redis:
+      repositories:
+        #forbid redis to scan repositories
+        enabled: false
+    #MongoDB configuration
+    mongodb:
+      host: 124.70.56.73
+      port: 27017
+      database: oomall
+      username: admin
+      password: '123456'
+      authentication-database: admin
+  redis:
+    host: 124.70.56.73
+    database: 0
+    password: 123456
+  datasource:
+    #JDBC drivers
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #database url
+    url: jdbc:mysql://123.60.152.141:3306/goods?serverTimezone=Asia/Shanghai
+    #database username and password
+    username: root
+    password: 123456
+    #database connection pool
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 3
+      min-idle: 3
+      max-active: 100
+      max-wait: 60000
+      stat-view-servlet:
+        login-username: admin
+        login-password: 123456
+        enabled: true
+        url-pattern: /druid/*
+
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 100
+      validation-query: select 1
+  jackson:
+    time-zone: GMT+8
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8084
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 100
+
+oomall:
+  core:
+    page-size:
+      max: 1000
+      default: 10
+  activity:
+    timeout: 3600
+
+  category:
+    timeout: 3600
+  onsale:
+    timeout: 3600
+  product:
+    timeout: 3600
